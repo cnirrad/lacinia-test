@@ -1,0 +1,17 @@
+{:objects {
+           :User {:description "A user in the system."
+                  :fields {:username {:type (non-null String)}
+                           :display_name {:type String}
+                           :email {:type String}
+                           :avatar {:type String
+                                    :description "A URL for the users avatar."}}}}
+ :queries {
+           :users {:type (list :User)
+                       :description "Returns users matching the query."
+                       :args {:term {:type String
+                                     :description "Search term."}
+                              :page {:type Int
+                                     :description "The page to retrieve."}
+                              :page_size {:type Int
+                                          :descrption "The number of results to return."}}
+                       :resolve :resolve-users}}}
