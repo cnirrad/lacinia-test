@@ -1,4 +1,4 @@
 CREATE TABLE users
-(username VARCHAR(20) PRIMARY KEY,
+(username VARCHAR(8) PRIMARY KEY,
  display_name VARCHAR(50),
- email VARCHAR(30));
+ email VARCHAR(100));

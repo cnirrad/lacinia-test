@@ -10,8 +10,8 @@
                        :description "Returns users matching the query."
                        :args {:term {:type String
                                      :description "Search term."}
-                              :page {:type Int
-                                     :description "The page to retrieve."}
-                              :page_size {:type Int
-                                          :descrption "The number of results to return."}}
+                              :first {:type Int
+                                      :description "The number of records to retrieve."}
+                              :cursor {:type String
+                                       :descrption "The opaque cursor of where to start."}}
                        :resolve :resolve-users}}}

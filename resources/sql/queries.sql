@@ -1,21 +1,26 @@
 -- :name create-user! :! :n
 -- :doc creates a new user record
 INSERT INTO users
-(id, first_name, last_name, email, pass)
-VALUES (:id, :first_name, :last_name, :email, :pass)
+(username, display_name, email)
+VALUES (:username, :display_name, :email)
 
 -- :name update-user! :! :n
 -- :doc update an existing user record
 UPDATE users
-SET first_name = :first_name, last_name = :last_name, email = :email
-WHERE id = :id
+SET display_name = :display_name, email = :email
+WHERE username = :username
 
 -- :name get-user :? :1
 -- :doc retrieve a user given the id.
 SELECT * FROM users
-WHERE id = :id
+WHERE username = :username
+
+-- :name search-user :? :*
+-- :doc search for users with a username or display name containing :term
+SELECT * FROM users
+WHERE username LIKE :term OR display_name LIKE :term
 
 -- :name delete-user! :! :n
 -- :doc delete a user given the id
 DELETE FROM users
-WHERE id = :id
+WHERE username = :username

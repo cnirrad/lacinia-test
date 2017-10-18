@@ -1,5 +1,6 @@
 (ns test-app.schema
   (:require
+   [test-app.db.core :as db]
    [clojure.data.json :as json]
    [clojure.java.io :as io]
    [clojure.edn :as edn]
@@ -8,9 +9,9 @@
    [com.walmartlabs.lacinia.util :refer [attach-resolvers]]))
 
 (defn resolve-users [context args value]
-  [{:username "col334"
-    :display_name "Darrin Collins"
-    :email "darrin.collins@tdameritrade.com"}])
+  (let [term (str "%" (:term args) "%")]
+    (db/search-user {:term term})))
+
 
 (defn read-schema
   []

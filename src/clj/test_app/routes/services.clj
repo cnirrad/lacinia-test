@@ -27,6 +27,10 @@
 (defn execute-query [q v]
   (graphql-handler q v))
 
+(def GraphQLRequest
+  {(s/required-key "query") s/Str
+   (s/optional-key "variables") {s/Str s/Str}})
+
 (defapi service-routes
   {:swagger {:ui "/swagger-ui"
              :spec "/swagger.json"
@@ -53,6 +57,12 @@
              (bad-request result)
              (ok result))))
 
+    (POST "/query" []
+          :body-params [query, variables]
+        (let [result (execute-query query variables)]
+         (if (-> result :errors seq)
+           (bad-request result)
+           (ok result))))
 
     (GET "/plus" []
       :return       Long
